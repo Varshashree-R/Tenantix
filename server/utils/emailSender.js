@@ -1,28 +1,34 @@
+// server/utils/emailSender.js
+import dotenv from "dotenv";
+dotenv.config(); // make sure env variables are loaded
+
 import nodemailer from "nodemailer";
-import dotenv from "dotenv"; //to use environment variables
-dotenv.config();
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
-/**
- * Send email using nodemailer transporter GMAIL
- */
-export const sendEmail = async (to, from, subject, body) => {
+export const sendEmail = async ({ to, subject, text, html }) => {
   try {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com", // Gmail SMTP
+      port: 587,              // STARTTLS
+      secure: false,          // false for STARTTLS
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    console.log("Using SMTP host:", transporter.options.host);
+
     await transporter.sendMail({
-      from,
+      from: `"Tenantix" <${pstilrocess.env.EMAIL_USER}>`,
       to,
       subject,
-      html: body,
+      text,
+      html,
     });
-  } catch (error) {
-    console.log(error);
+
+    console.log("Email sent successfully to", to);
+  } catch (err) {
+    console.error("Error sending email:", err);
+    throw err; // rethrow so calling code knows it failed
   }
 };
