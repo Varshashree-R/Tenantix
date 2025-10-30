@@ -19,7 +19,7 @@ export const sendEmail = async ({ to, subject, text, html }) => {
     console.log("Using SMTP host:", transporter.options.host);
 
     await transporter.sendMail({
-      from: `"Tenantix" <${pstilrocess.env.EMAIL_USER}>`,
+      from: `"Tenantix" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       text,
