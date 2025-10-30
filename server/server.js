@@ -69,6 +69,10 @@ app.use(
 
 app.use(express.json());
 
+app.get("/test-backend", (req, res) => {
+  res.send("Backend is working!");
+});
+
 //app.options("*", cors({
  // origin: "https://tenantix-finalfrontend.onrender.com",
  // credentials: true,
