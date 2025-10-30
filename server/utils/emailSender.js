@@ -16,13 +16,14 @@ const transporter = nodemailer.createTransport({
  */
 export const sendEmail = async (to, from, subject, body) => {
   try {
-    await transporter.sendMail({
-      from,
+   const info = await transporter.sendMail({
+      from: `"Tenantix" <${process.env.EMAIL_USER}>`, // must match Gmail App Password
       to,
       subject,
       html: body,
     });
+    console.log("Message sent:", info.messageId);
   } catch (error) {
-    console.log(error);
+    console.log("Error sending email:", error);
   }
 };
