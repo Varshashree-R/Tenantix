@@ -13,7 +13,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const sendEmail = async (to, subject, body) => {
   try {
     const response = await resend.emails.send({
-      from: `<${process.env.EMAIL_USER}>`,
+      from: "Tenantix Team <varshashree121@gmail.com>",
       to,
       subject,
       html: body,
