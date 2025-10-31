@@ -14,7 +14,7 @@ export const sendEmail = async (to, subject, body) => {
   try {
     const response = await resend.emails.send({
       from: "Tenantix Team <onboarding@resend.dev>",
-      to,
+      to: email,
       subject,
       html: body,
     });
