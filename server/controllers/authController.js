@@ -131,7 +131,7 @@ const register = async (req, res) => {
       const body = `<p>Hello ${owner.firstName} ${owner.lastName},</p>
                     <p>Click to verify:</p>
                     <a href="${process.env.CLIENT_URL}/#/verify-account/owner/${verificationToken}">Verify</a>`;
-      await sendEmail(to, from, subject, body);
+      await sendEmail(email, "Email Verification Link", body);
 
       res.status(201).json({ success: true, userType: "owner", email: owner.email });
 
@@ -155,7 +155,7 @@ const register = async (req, res) => {
       const body = `<p>Hello ${tenant.firstName} ${tenant.lastName},</p>
                     <p>Click to verify:</p>
                     <a href="${process.env.CLIENT_URL}/#/verify-account/tenant/${verificationToken}">Verify</a>`;
-      await sendEmail(to, from, subject, body);
+      await sendEmail(email, "Email Verification Link", body);
 
       res.status(201).json({ success: true, userType: "tenant", email: tenant.email });
 
@@ -330,7 +330,7 @@ const resendVerificationEmail = async (req, res) => {
     <p>Regards,</p>
     <p>Team Tenantix</p>
     `;
-    await sendEmail(to, from, subject, body);
+    await sendEmail(email, "Email Verification Link", body);
 
     res
       .status(200)

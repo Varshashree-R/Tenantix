@@ -1,29 +1,28 @@
-import nodemailer from "nodemailer";
-import dotenv from "dotenv"; //to use environment variables
+// server/utils/emailSender.js
+import { Resend } from "resend";
+import dotenv from "dotenv";
+
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+// Initialize Resend with your API key from environment variable
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 /**
- * Send email using nodemailer transporter GMAIL
+ * Send email using Resend API
  */
-export const sendEmail = async (to, from, subject, body) => {
+export const sendEmail = async (to, subject, body) => {
   try {
-   const info = await transporter.sendMail({
-      from: `"Tenantix" <${process.env.EMAIL_USER}>`, // must match Gmail App Password
+    const response = await resend.emails.send({
+      from: "Tenantix " `<${process.env.EMAIL_USER}>`,
       to,
       subject,
       html: body,
     });
-    console.log("Message sent:", info.messageId);
+
+    console.log("✅ Email sent:", response);
+    return response;
   } catch (error) {
-    console.log("Error sending email:", error);
+    console.error("❌ Error sending email:", error);
+    throw error;
   }
 };
