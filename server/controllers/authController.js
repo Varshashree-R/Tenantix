@@ -294,7 +294,7 @@ const resendVerificationEmail = async (req, res) => {
     `;
 
     // send email with token link
-    await sendEmail(to, from, subject, body);
+    await sendEmail(email, "Email Verification Link", body);
 
     res
       .status(200)
@@ -436,7 +436,9 @@ const forgotPassword = async (req, res) => {
       } else {
         //if no error
         //send email
-        await sendEmail(to, from, subject, body);
+        await sendEmail(email, "Email Verification Link", body);
+
+       // await sendEmail(to, from, subject, body);
         return res.json({ msg: `Token has been sent to ${email}` });
       }
     });
@@ -467,7 +469,9 @@ const forgotPassword = async (req, res) => {
       } else {
         //if no error
         //send email
-        await sendEmail(to, from, subject, body);
+        await sendEmail(email, "Email Verification Link", body);
+
+       // await sendEmail(to, from, subject, body);
         return res.json({ msg: `Token has been sent to ${email}` });
       }
     });
