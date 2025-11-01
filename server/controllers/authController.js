@@ -131,7 +131,7 @@ const register = async (req, res) => {
       const body = `<p>Hello ${owner.firstName} ${owner.lastName},</p>
                     <p>Click to verify:</p>
                     <a href="${process.env.CLIENT_URL}/#/verify-account/owner/${verificationToken}">Verify</a>`;
-      await sendEmail(email, "Email Verification Link", body);
+      await sendEmail(to, from, subject, body);
 
       res.status(201).json({ success: true, userType: "owner", email: owner.email });
 
@@ -155,7 +155,7 @@ const register = async (req, res) => {
       const body = `<p>Hello ${tenant.firstName} ${tenant.lastName},</p>
                     <p>Click to verify:</p>
                     <a href="${process.env.CLIENT_URL}/#/verify-account/tenant/${verificationToken}">Verify</a>`;
-      await sendEmail(email, "Email Verification Link", body);
+      await sendEmail(to, from, subject, body);
 
       res.status(201).json({ success: true, userType: "tenant", email: tenant.email });
 
@@ -294,7 +294,7 @@ const resendVerificationEmail = async (req, res) => {
     `;
 
     // send email with token link
-    await sendEmail(email, "Email Verification Link", body);
+    await sendEmail(to, from, subject, body);
 
     res
       .status(200)
@@ -330,7 +330,7 @@ const resendVerificationEmail = async (req, res) => {
     <p>Regards,</p>
     <p>Team Tenantix</p>
     `;
-    await sendEmail(email, "Email Verification Link", body);
+    await sendEmail(to, from, subject, body);
 
     res
       .status(200)
@@ -436,9 +436,7 @@ const forgotPassword = async (req, res) => {
       } else {
         //if no error
         //send email
-        await sendEmail(email, "Email Verification Link", body);
-
-       // await sendEmail(to, from, subject, body);
+        await sendEmail(to, from, subject, body);
         return res.json({ msg: `Token has been sent to ${email}` });
       }
     });
@@ -469,9 +467,7 @@ const forgotPassword = async (req, res) => {
       } else {
         //if no error
         //send email
-        await sendEmail(email, "Email Verification Link", body);
-
-       // await sendEmail(to, from, subject, body);
+        await sendEmail(to, from, subject, body);
         return res.json({ msg: `Token has been sent to ${email}` });
       }
     });
