@@ -1,4 +1,5 @@
 import express from "express";
+import { sendEmail } from "./utils/emailSender.js";
 import dotenv from "dotenv";
 import "express-async-errors";
 import cors from "cors";

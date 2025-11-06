@@ -12,16 +12,19 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 export const sendEmail = async (to, subject, body) => {
   try {
     const msg = {
-      to: to,  // ✅ use function argument
-      from: process.env.SENDGRID_FROM,  // ✅ verified sender
+      to: to, // ✅ dynamic receiver
+      from: process.env.SENDGRID_FROM, // ✅ verified sender only
       subject,
       html: body,
     };
 
     const response = await sgMail.send(msg);
-
-    console.log("✅ Email sent successfully:", response[0].statusCode);
+    console.log("✅ Email sent:", response[0].statusCode);
   } catch (error) {
-    console.error("❌ Error sending email:", error.response?.body || error);
+    console.error(
+      "❌ SENDGRID ERROR FULL:",
+      JSON.stringify(error.response?.body, null, 2)
+    );
+    throw error;
   }
 };
