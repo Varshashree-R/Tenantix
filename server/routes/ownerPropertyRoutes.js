@@ -10,6 +10,11 @@ import {
 import upload from "../middleware/multerImageMiddleware.js";
 import { cloudinaryMultipleUpload } from "../middleware/cloudinaryUpload.js";
 
+// Handle preflight OPTIONS requests for all routes in this router
+router.options("*", (req, res) => {
+  res.sendStatus(200);
+});
+
 /**
  * @description Post real estate
  * @route POST /api/owner/real-estate
