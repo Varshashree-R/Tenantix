@@ -175,7 +175,7 @@ const Register = () => {
                   </label>
 
                   <input
-                    required
+                    //required
                     name="profileImage"
                     className="font-robotoNormal w-full px-3 py-1.5 text-base font-normal border border-solid border-gray-300 rounded cursor-pointer focus:border-primary focus:outline-none"
                     type="file"

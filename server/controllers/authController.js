@@ -467,7 +467,7 @@ const forgotPassword = async (req, res) => {
       } else {
         //if no error
         //send email
-        await sendEmail(to, from, subject, body);
+        await sendEmail(to, subject, body);
         return res.json({ msg: `Token has been sent to ${email}` });
       }
     });
