@@ -79,7 +79,7 @@ app.get("/test-backend", (req, res) => {
 });
 
 // ✅ EMAIL TEST ROUTE
-import { sendEmail } from "./utils/sendEmail.js";  // adjust path if needed
+import { sendEmail } from "./utils/emailSender.js";  // adjust path if needed
 
 app.get("/api/test-email", async (req, res) => {
   try {
