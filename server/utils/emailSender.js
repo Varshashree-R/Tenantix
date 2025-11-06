@@ -13,7 +13,7 @@ export const sendEmail = async (to, from, subject, body) => {
   try {
     const msg = {
       to:['varshashreegowda21@gmail,com'],
-      from: process.env.EMAIL.USER, // MUST be verified in SendGrid
+      from: process.env.SENDGRID_FROM, // MUST be verified in SendGrid
       subject,
       html: body,
     };
