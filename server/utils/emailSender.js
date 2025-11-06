@@ -9,11 +9,11 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 /**
  * Send email using SendGrid API
  */
-export const sendEmail = async (to, from, subject, body) => {
+export const sendEmail = async (to, subject, body) => {
   try {
     const msg = {
-      to:['varshashreegowda21@gmail,com'],
-      from: process.env.SENDGRID_FROM, // MUST be verified in SendGrid
+      to: to,  // ✅ use function argument
+      from: process.env.SENDGRID_FROM,  // ✅ verified sender
       subject,
       html: body,
     };
@@ -22,6 +22,6 @@ export const sendEmail = async (to, from, subject, body) => {
 
     console.log("✅ Email sent successfully:", response[0].statusCode);
   } catch (error) {
-    console.error("❌ Error sending email:", error);
+    console.error("❌ Error sending email:", error.response?.body || error);
   }
 };

@@ -78,13 +78,10 @@ app.get("/test-backend", (req, res) => {
   res.status(200).json({ message: "Backend is working!" });
 });
 
-// ✅ EMAIL TEST ROUTE
-import { sendEmail } from "./utils/emailSender.js";  // adjust path if needed
-
 app.get("/api/test-email", async (req, res) => {
   try {
     await sendEmail(
-      "varshashreegowda21@gmail.com", // the email where YOU want to receive the test
+      "varshashreegowda21@gmail.com",
       "Tenantix Email Test ✅",
       "<h2>Hello! SendGrid test email from Tenantix server.</h2>"
     );
@@ -95,6 +92,7 @@ app.get("/api/test-email", async (req, res) => {
     res.status(500).send("❌ Email failed: " + err.message);
   }
 });
+
 
 
 // ======================= ROUTES ============================
