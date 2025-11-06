@@ -126,12 +126,12 @@ const register = async (req, res) => {
       owner.accountVerificationToken = undefined;
 
       const to = email;
-      const from = process.env.EMAIL_USER;
+      //const from = process.env.SENDGRID_FROM;
       const subject = "Email Verification Link";
       const body = `<p>Hello ${owner.firstName} ${owner.lastName},</p>
                     <p>Click to verify:</p>
                     <a href="${process.env.CLIENT_URL}/#/verify-account/owner/${verificationToken}">Verify</a>`;
-      await sendEmail(to, from, subject, body);
+      await sendEmail(to, subject, body);
 
       res.status(201).json({ success: true, userType: "owner", email: owner.email });
 
@@ -150,12 +150,12 @@ const register = async (req, res) => {
       tenant.accountVerificationToken = undefined;
 
       const to = email;
-      const from = process.env.EMAIL_USER;
+      //const from = process.env.SENDGRID_FROM;
       const subject = "Email Verification Link";
       const body = `<p>Hello ${tenant.firstName} ${tenant.lastName},</p>
                     <p>Click to verify:</p>
                     <a href="${process.env.CLIENT_URL}/#/verify-account/tenant/${verificationToken}">Verify</a>`;
-      await sendEmail(to, from, subject, body);
+      await sendEmail(to, subject, body);
 
       res.status(201).json({ success: true, userType: "tenant", email: tenant.email });
 
@@ -283,7 +283,7 @@ const resendVerificationEmail = async (req, res) => {
 
     // send email with token code
     const to = email;
-    const from = process.env.EMAIL_USER;
+    //const from = process.env.SENDGRID_FROM;
     const subject = "Email Verification Link";
     const body = `
     <p> Hello ${owner.firstName} ${owner.lastName},</p>
@@ -294,7 +294,7 @@ const resendVerificationEmail = async (req, res) => {
     `;
 
     // send email with token link
-    await sendEmail(to, from, subject, body);
+    await sendEmail(to, subject, body);
 
     res
       .status(200)
@@ -321,7 +321,7 @@ const resendVerificationEmail = async (req, res) => {
 
     // send email with token code
     const to = email;
-    const from = process.env.EMAIL_USER;
+    //const from = process.env.SENDGRID_FROM;
     const subject = "Email Verification Link";
     const body = `
     <p> Hello ${tenant.firstName} ${tenant.lastName},</p>
@@ -330,7 +330,7 @@ const resendVerificationEmail = async (req, res) => {
     <p>Regards,</p>
     <p>Team Tenantix</p>
     `;
-    await sendEmail(to, from, subject, body);
+    await sendEmail(to, subject, body);
 
     res
       .status(200)
@@ -420,7 +420,7 @@ const forgotPassword = async (req, res) => {
 
     // send email with token
     const to = email;
-    const from = process.env.EMAIL_USER;
+    //const from = process.env.SENDGRID_FROM;
     const subject = "Reset Account Password Link";
     const body = `
   <h3>Please click the link below to reset your password</h3>
@@ -436,7 +436,7 @@ const forgotPassword = async (req, res) => {
       } else {
         //if no error
         //send email
-        await sendEmail(to, from, subject, body);
+        await sendEmail(to, subject, body);
         return res.json({ msg: `Token has been sent to ${email}` });
       }
     });
@@ -451,7 +451,7 @@ const forgotPassword = async (req, res) => {
     });
 
     const to = email;
-    const from = process.env.EMAIL_USER;
+    //const from = process.env.SENDGRID_FROM;
     const subject = "Reset Account Password Link";
     const body = `
   <h3>Please click the link below to reset your password</h3>
